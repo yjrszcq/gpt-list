@@ -27,8 +27,7 @@ DOMAIN-SUFFIX,host.livekit.cloud
 DOMAIN-SUFFIX,turn.livekit.cloud
 
 # ==================== 身份认证、证书与人机验证 ====================
-# 防 IP 不一致触发风控，含 Cloudflare Turnstile / Arkose / Auth0 / IdenTrust
-DOMAIN,challenges.cloudflare.com
+# 防 IP 不一致触发风控，含 Arkose / Auth0 / IdenTrust
 DOMAIN,openai-api.arkoselabs.com
 DOMAIN-SUFFIX,client-api.arkoselabs.com
 DOMAIN-SUFFIX,auth0.com
