@@ -1,0 +1,63 @@
+# NAME: GPT (Merged: blackmatrix7 + 水獭)
+# FORMAT: Clash / Mihomo Rule-Provider (behavior: classical)
+# DOMAIN: 8 | DOMAIN-SUFFIX: 24 | DOMAIN-KEYWORD: 1 | PROCESS-NAME: 2 | IP-CIDR: 2 | IP-ASN: 1
+# TOTAL: 38
+
+payload:
+  # ==================== 核心服务与 API ====================
+  - DOMAIN-SUFFIX,openai.com
+  - DOMAIN-SUFFIX,chatgpt.com
+  - DOMAIN-SUFFIX,ai.com
+  - DOMAIN-KEYWORD,openai
+  - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
+
+  # ==================== 静态资源、CDN 与云存储 ====================
+  - DOMAIN-SUFFIX,oaistatic.com
+  - DOMAIN-SUFFIX,oaiusercontent.com
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+  - DOMAIN-SUFFIX,openaicom.imgix.net
+  - DOMAIN,chat.openai.com.cdn.cloudflare.net
+  - DOMAIN,openaicomproductionae4b.blob.core.windows.net
+  - DOMAIN,production-openaicom-storage.azureedge.net
+
+  # ==================== 语音与实时通信 (LiveKit) ====================
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud
+  - DOMAIN-SUFFIX,host.livekit.cloud
+  - DOMAIN-SUFFIX,turn.livekit.cloud
+
+  # ==================== 身份认证、证书与人机验证 ====================
+  # 防 IP 不一致触发风控，含 Cloudflare Turnstile / Arkose / Auth0 / IdenTrust
+  - DOMAIN,challenges.cloudflare.com
+  - DOMAIN,openai-api.arkoselabs.com
+  - DOMAIN-SUFFIX,client-api.arkoselabs.com
+  - DOMAIN-SUFFIX,auth0.com
+  - DOMAIN-SUFFIX,identrust.com
+
+  # ==================== 特性开关、遥测与错误监控 ====================
+  # 含 Statsig / LaunchDarkly / Sentry / Segment / Datadog / Cloudflare Insights
+  - DOMAIN-SUFFIX,statsigapi.net
+  - DOMAIN-SUFFIX,api.statsig.com
+  - DOMAIN-SUFFIX,featuregates.org
+  - DOMAIN-SUFFIX,launchdarkly.com
+  - DOMAIN-SUFFIX,sentry.io
+  - DOMAIN-SUFFIX,segment.io
+  - DOMAIN-SUFFIX,observeit.net
+  - DOMAIN,browser-intake-datadoghq.com
+  - DOMAIN,static.cloudflareinsights.com
+
+  # ==================== 支付、搜索与客服依赖 ====================
+  # 含 Stripe / Intercom / Algolia，若不希望影响其他网站可按需注释
+  - DOMAIN-SUFFIX,stripe.com
+  - DOMAIN-SUFFIX,intercom.io
+  - DOMAIN-SUFFIX,intercomcdn.com
+  - DOMAIN-SUFFIX,algolia.net
+
+  # ==================== 桌面端本地进程 ====================
+  - PROCESS-NAME,ChatGPT
+  - PROCESS-NAME,Codex
+
+  # ==================== IP 与 ASN ====================
+  # 保留 no-resolve 避免前置规则触发全局 DNS 解析；ASN 20473 依赖本地 GeoIP/ASN 库
+  - IP-CIDR,24.199.123.28/32,no-resolve
+  - IP-CIDR,64.23.132.171/32,no-resolve
+  - IP-ASN,20473,no-resolve
