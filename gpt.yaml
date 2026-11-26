@@ -10,6 +10,7 @@ payload:
   - DOMAIN-KEYWORD,openai
   - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
 
+
   # ==================== 静态资源、CDN 与云存储 ====================
   # 旧 CDN 地址保留为兼容项，当前实际用途未逐一确认
   - DOMAIN-SUFFIX,oaistatic.com
@@ -21,50 +22,87 @@ payload:
   - DOMAIN,openaicomproductionae4b.blob.core.windows.net
   - DOMAIN,production-openaicom-storage.azureedge.net
 
+
   # ==================== 语音与实时通信 (LiveKit) ====================
   # host / turn 为共享基础设施
   - DOMAIN-SUFFIX,chatgpt.livekit.cloud
   - DOMAIN-SUFFIX,host.livekit.cloud
   - DOMAIN-SUFFIX,turn.livekit.cloud
 
+
   # ==================== 身份认证、证书与人机验证 ====================
-  # 防 IP 不一致触发风控，含 Arkose / Auth0 / IdenTrust
+
+  # Arkose Labs 人机验证
   - DOMAIN,openai-api.arkoselabs.com
   - DOMAIN-SUFFIX,client-api.arkoselabs.com
+
+  # Auth0 身份认证
   - DOMAIN-SUFFIX,auth0.com
+
+  # IdenTrust 证书服务
   - DOMAIN-SUFFIX,identrust.com
 
-  # ==================== 特性开关、遥测与错误监控 ====================
-  # 含 Statsig / LaunchDarkly / Sentry / Segment / Datadog / Cloudflare Insights / oaistatsig / Datadog
+  # Cloudflare 通用验证服务（默认禁用）
+  # - DOMAIN,challenges.cloudflare.com
+
+
+  # ==================== 特性开关与配置 ====================
+
+  # OpenAI / Statsig
   - DOMAIN-SUFFIX,oaistatsig.com
+  - DOMAIN-SUFFIX,statsig.com
   - DOMAIN-SUFFIX,statsigapi.net
-  - DOMAIN-SUFFIX,api.statsig.com
+  - DOMAIN-SUFFIX,statsigcdn.com
   - DOMAIN-SUFFIX,featuregates.org
+
+  # LaunchDarkly
   - DOMAIN-SUFFIX,launchdarkly.com
+
+
+  # ==================== 遥测、分析与错误监控 ====================
+
+  # Sentry
   - DOMAIN-SUFFIX,sentry.io
+
+  # Segment
   - DOMAIN-SUFFIX,segment.io
+
+  # ObserveIT
   - DOMAIN-SUFFIX,observeit.net
+
+  # Cloudflare Insights
   - DOMAIN,static.cloudflareinsights.com
+
+  # Datadog / Web / CLI 遥测
   # - DOMAIN,browser-intake-datadoghq.com
   # - DOMAIN,rum.browser-intake-datadoghq.com
   - DOMAIN-KEYWORD,datadog
 
+
   # ==================== 支付、搜索与客服依赖 ====================
-  # 含 Stripe / Intercom / Algolia，若不希望影响其他网站可按需注释
+
+  # Stripe 支付
   - DOMAIN-SUFFIX,stripe.com
+
+  # Intercom 客服及 Widget
   - DOMAIN-SUFFIX,intercom.io
   - DOMAIN-SUFFIX,intercomcdn.com
+
+  # Algolia 搜索服务
   - DOMAIN-SUFFIX,algolia.net
+
 
   # ==================== 桌面端本地进程 ====================
   # 需要客户端支持进程识别，且名称与实际进程一致
   - PROCESS-NAME-WILDCARD,ChatGPT*
   - PROCESS-NAME-WILDCARD,Codex*
 
+
   # ==================== IP 与 ASN 兼容项 ====================
-  # 两个固定 IP 的当前 OpenAI 用途未确认，按兼容原则保留
-  # AS20473 属于 Vultr，会覆盖其网络内的其他业务
-  # no-resolve 避免这些规则主动触发目标域名解析
-  - IP-CIDR,24.199.123.28/32,no-resolve
-  - IP-CIDR,64.23.132.171/32,no-resolve
-  - IP-ASN,20473,no-resolve
+
+  # DigitalOcean IP（当前 OpenAI 用途未确认，默认禁用）
+  # - IP-CIDR,24.199.123.28/32,no-resolve
+  # - IP-CIDR,64.23.132.171/32,no-resolve
+
+  # Vultr 公共 ASN（匹配范围过大，默认禁用）
+  # - IP-ASN,20473,no-resolve
