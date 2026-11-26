@@ -59,8 +59,8 @@ payload:
 
   # ==================== 桌面端本地进程 ====================
   # 需要客户端支持进程识别，且名称与实际进程一致
-  - PROCESS-NAME,ChatGPT
-  - PROCESS-NAME,Codex
+  - PROCESS-NAME-WILDCARD,ChatGPT*
+  - PROCESS-NAME-WILDCARD,Codex*
 
   # ==================== IP 与 ASN 兼容项 ====================
   # 两个固定 IP 的当前 OpenAI 用途未确认，按兼容原则保留
